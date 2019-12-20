@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>922</width>
-    <height>525</height>
+    <height>497</height>
    </rect>
   </property>
   <property name="palette">
@@ -493,14 +493,17 @@
       <height>315</height>
      </rect>
     </property>
+    <property name="frameShape">
+     <enum>QFrame::Panel</enum>
+    </property>
     <property name="text">
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap>background.jpg</pixmap>
+     <pixmap>background.png</pixmap>
     </property>
    </widget>
-   <widget class="QPushButton" name="button_OpenFile">
+   <widget class="QPushButton" name="button_OpenImage">
     <property name="geometry">
      <rect>
       <x>680</x>

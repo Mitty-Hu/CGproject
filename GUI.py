@@ -23,6 +23,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.button_CloseCamera.clicked.connect(self.CloseCamera)
         self.button_Capture.clicked.connect(self.Capture)
         self.CameraTimer.timeout.connect(self.ShowCamera)#每次倒计时溢出，调用函数刷新页面
+        self.button_OpenImage.clicked.connect(self.OpenImage)
 
     def OpenCamera(self):#打开摄像头，启动倒计时
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 后一个参数用来消一个奇怪的warn
@@ -50,7 +51,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.CameraTimer.stop()
         self.cap.release()
         self.label_ShowCamera.clear()
-        self.label_ShowCamera.setPixmap(QtGui.QPixmap("background.jpg"))
+        self.label_ShowCamera.setPixmap(QtGui.QPixmap("background.png"))
 
     def Capture(self):#要思考未打开摄像头时按下“拍照”的问题
         flag, self.image = self.cap.read()
@@ -62,6 +63,11 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.CameraTimer.stop()
         self.cap.release()
 
+    def OpenImage(self):
+        imgName,imgType = QFileDialog.getOpenFileName(self,"打开图片",""," *.jpg;;*.png;;*.jpeg;;*.bmp;;All Files (*)")
+        print(imgName)
+        png = QtGui.QPixmap(imgName).scaled(self.label_ShowCamera.width(), self.label_ShowCamera.height())
+        self.label_ShowCamera.setPixmap(png)
 
 
 
