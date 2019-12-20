@@ -2,7 +2,7 @@ import cv2
 
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow,QFileDialog
 from PyQt5.QtGui import QIcon, QPixmap, QImage, QPalette, QBrush
 from PyQt5 import QtCore,QtGui,QtWidgets
 from GUIDesign import *
@@ -40,7 +40,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
     def ShowCamera(self):
         flag, self.image = self.cap.read()
 
-        ShowVideo = cv2.resize(self.image, (400, 225))
+        ShowVideo = cv2.resize(self.image, (560, 315))
         ShowVideo = cv2.cvtColor(ShowVideo, cv2.COLOR_BGR2RGB)
         showImage = QtGui.QImage(ShowVideo.data, ShowVideo.shape[1], ShowVideo.shape[0],
                                  QtGui.QImage.Format_RGB888)
@@ -50,16 +50,19 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.CameraTimer.stop()
         self.cap.release()
         self.label_ShowCamera.clear()
+        self.label_ShowCamera.setPixmap(QtGui.QPixmap("background.jpg"))
 
-    def Capture(self):
+    def Capture(self):#要思考未打开摄像头时按下“拍照”的问题
         flag, self.image = self.cap.read()
-        ShowCapture = cv2.resize(self.image, (400, 225))
+        ShowCapture = cv2.resize(self.image, (560, 315))
         ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
         showImage = QtGui.QImage(ShowCapture.data, ShowCapture.shape[1], ShowCapture.shape[0],
                                  QtGui.QImage.Format_RGB888)
         self.label_ShowCamera.setPixmap(QtGui.QPixmap.fromImage(showImage))
         self.CameraTimer.stop()
         self.cap.release()
+
+
 
 
 if __name__ == '__main__':
