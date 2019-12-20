@@ -12,7 +12,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         super(MyWindow, self).__init__(parent)
 
         self.CameraTimer = QtCore.QTimer()
-        self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)#后一个参数用来消一个奇怪的warn
+
         self.CAM_NUM = 0
 
         self.setupUi(self)
@@ -25,6 +25,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.CameraTimer.timeout.connect(self.ShowCamera)#每次倒计时溢出，调用函数刷新页面
 
     def OpenCamera(self):#打开摄像头，启动倒计时
+        self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 后一个参数用来消一个奇怪的warn
         if self.CameraTimer.isActive() == False:
             flag = self.cap.open(self.CAM_NUM)
             if flag == False:
