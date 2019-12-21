@@ -25,6 +25,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.actionOpenImage.triggered.connect(self.OpenImage)
         self.actionOpenCamera.triggered.connect(self.OpenCamera)
         self.actionCloseCamera.triggered.connect(self.CloseCamera)
+        self.actionClearImage.triggered.connect(self.ClearImage)
 
     def OpenCamera(self):#打开摄像头，启动倒计时
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 后一个参数用来消一个奇怪的warn
@@ -42,7 +43,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
     def ShowCamera(self):
         flag, self.image = self.cap.read()
 
-        ShowVideo = cv2.resize(self.image, (640,360))
+        ShowVideo = cv2.resize(self.image, (880,495))
         ShowVideo = cv2.cvtColor(ShowVideo, cv2.COLOR_BGR2RGB)
         showImage = QtGui.QImage(ShowVideo.data, ShowVideo.shape[1], ShowVideo.shape[0],
                                  QtGui.QImage.Format_RGB888)
@@ -56,7 +57,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
     def Capture(self):#要思考未打开摄像头时按下“拍照”的问题
         flag, self.image = self.cap.read()
-        ShowCapture = cv2.resize(self.image, (640,360))
+        ShowCapture = cv2.resize(self.image, (880,495))
         ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
         showImage = QtGui.QImage(ShowCapture.data, ShowCapture.shape[1], ShowCapture.shape[0],
                                  QtGui.QImage.Format_RGB888)
@@ -67,9 +68,13 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         curPath = QDir.currentPath()
         imgName,imgType = QFileDialog.getOpenFileName(self,"打开图片",curPath," *.jpg;;*.png;;*.jpeg;;*.bmp;;All Files (*)")
         print(imgName)
-        png = QtGui.QPixmap(imgName).scaled(self.label_ShowCamera.width(), self.label_ShowCamera.height())
-        self.label_ShowCamera.setPixmap(png)
+        img = QtGui.QPixmap(imgName).scaled(self.label_ShowCamera.width(), self.label_ShowCamera.height())
+        self.label_ShowCamera.setPixmap(img)
 
+    def ClearImage(self):
+        self.CameraTimer.stop()
+        self.cap.release()
+        self.label_ShowCamera.clear()
 
 
 
