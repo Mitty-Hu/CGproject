@@ -20,7 +20,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.slot_init()
 
     def slot_init(self):
-        self.button_Capture.clicked.connect(self.Capture)
+        self.button_CaptureAnalyse.clicked.connect(self.CaptureAnalyse)
         self.CameraTimer.timeout.connect(self.ShowCamera)#每次倒计时溢出，调用函数刷新页面
         self.actionOpenImage.triggered.connect(self.OpenImage)
         self.actionOpenCamera.triggered.connect(self.OpenCamera)
@@ -55,7 +55,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.label_ShowCamera.clear()
         self.label_ShowCamera.setPixmap(QtGui.QPixmap("background.png"))
 
-    def Capture(self):#要思考未打开摄像头时按下“拍照”的问题
+    def CaptureAnalyse(self):#要思考未打开摄像头时按下“拍照”的问题
         flag, self.image = self.cap.read()
         ShowCapture = cv2.resize(self.image, (880,495))
         ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
