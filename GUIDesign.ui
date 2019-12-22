@@ -641,8 +641,8 @@ padding-right:10px;</string>
      <widget class="QRadioButton" name="radioButton_NormalImage">
       <property name="geometry">
        <rect>
-        <x>110</x>
-        <y>40</y>
+        <x>70</x>
+        <y>35</y>
         <width>101</width>
         <height>21</height>
        </rect>
@@ -659,8 +659,8 @@ padding-right:10px;</string>
      <widget class="QRadioButton" name="radioButton_FaceTract">
       <property name="geometry">
        <rect>
-        <x>290</x>
-        <y>40</y>
+        <x>240</x>
+        <y>35</y>
         <width>101</width>
         <height>21</height>
        </rect>
@@ -672,6 +672,43 @@ padding-right:10px;</string>
       </property>
       <property name="text">
        <string>人脸捕捉</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="radioButton_EdgeTract">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>35</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>边缘检测</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="horizontalSlider_EdgeTract">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>55</y>
+        <width>160</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="minimum">
+       <number>101</number>
+      </property>
+      <property name="maximum">
+       <number>500</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </widget>
@@ -738,6 +775,21 @@ padding-right:10px;</string>
     <property name="title">
      <string>信息</string>
     </property>
+    <widget class="QTextEdit" name="textEdit_Report">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>241</width>
+       <height>481</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="label_SJTUlogo">
     <property name="geometry">
@@ -768,7 +820,7 @@ padding-right:10px;</string>
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>
@@ -852,7 +904,7 @@ padding-right:10px;</string>
     <string>Save</string>
    </property>
    <property name="toolTip">
-    <string>保存图片</string>
+    <string>保存报告</string>
    </property>
   </action>
  </widget>

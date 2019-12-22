@@ -2,9 +2,9 @@ import cv2
 
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow,QFileDialog
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5.QtGui import QIcon, QPixmap, QImage, QPalette, QBrush
-from PyQt5 import QtCore,QtGui,QtWidgets
+from PyQt5 import QtCore,QtGui, QtWidgets
 from PyQt5.QtCore import QDir,pyqtSlot
 from GUIDesign import *
 
@@ -16,9 +16,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
         self.CAM_NUM = 0
         self.Gender = -1
+        self.VideoMode = 0
+
+        self.EdgeTractThrehold1 = 50
+        self.EdgeTractThrehold2 = 101
+
+        self.report = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
 
         self.setupUi(self)
         self.slot_init()
+
 
     def slot_init(self):
         self.button_CaptureAnalyse.clicked.connect(self.CaptureAnalyse)
@@ -27,6 +34,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.actionOpenCamera.triggered.connect(self.OpenCamera)
         self.actionCloseCamera.triggered.connect(self.CloseCamera)
         self.actionClearImage.triggered.connect(self.ClearImage)
+        self.horizontalSlider_EdgeTract.valueChanged.connect(self.SliderChangeValue)
 
     def OpenCamera(self):#打开摄像头，启动倒计时
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 后一个参数用来消一个奇怪的warn
@@ -42,9 +50,21 @@ class MyWindow(QMainWindow, Ui_MainWindow):
             self.label_ShowCamera.clear()
 
     def ShowCamera(self):
+        if self.radioButton_NormalImage.isChecked():
+            self.VideoMode = 0
+        elif self.radioButton_EdgeTract.isChecked():
+            self.VideoMode = 2
+        elif self.radioButton_FaceTract.isChecked():
+            self.VideoMode = 1
+
         flag, self.image = self.cap.read()
 
-        ShowVideo = cv2.resize(self.image, (880,495))
+        if self.VideoMode == 0:
+            ShowVideo = cv2.resize(self.image, (880, 495))
+        elif self.VideoMode == 2:
+            self.edge = cv2.Canny(self.image,self.EdgeTractThrehold1,self.EdgeTractThrehold2)
+            ShowVideo = cv2.resize(self.edge, (880,495))
+
         ShowVideo = cv2.cvtColor(ShowVideo, cv2.COLOR_BGR2RGB)
         showImage = QtGui.QImage(ShowVideo.data, ShowVideo.shape[1], ShowVideo.shape[0],
                                  QtGui.QImage.Format_RGB888)
@@ -72,6 +92,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                                     QtGui.QImage.Format_RGB888)
             self.label_ShowCamera.setPixmap(QtGui.QPixmap.fromImage(showImage))
             self.CameraTimer.stop()
+            self.textEdit_Report.setPlainText(self.report)
 
     def OpenImage(self):
         curPath = QDir.currentPath()
@@ -84,6 +105,10 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.CameraTimer.stop()
         self.cap.release()
         self.label_ShowCamera.clear()
+        self.textEdit_Report.clear()
+
+    def SliderChangeValue(self):
+        self.EdgeTractThrehold2 = self.horizontalSlider_EdgeTract.value()
 
 
 
