@@ -15,6 +15,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.CameraTimer = QtCore.QTimer()
 
         self.CAM_NUM = 0
+        self.Gender = -1
 
         self.setupUi(self)
         self.slot_init()
@@ -26,6 +27,8 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.actionOpenCamera.triggered.connect(self.OpenCamera)
         self.actionCloseCamera.triggered.connect(self.CloseCamera)
         self.actionClearImage.triggered.connect(self.ClearImage)
+        self.radioButton_Male.toggled.connect(self.SelectMale)
+        self.radioButton_Female.toggled.connect(self.SelectFemale)
 
     def OpenCamera(self):#打开摄像头，启动倒计时
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 后一个参数用来消一个奇怪的warn
@@ -56,13 +59,16 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.label_ShowCamera.setPixmap(QtGui.QPixmap("background.png"))
 
     def CaptureAnalyse(self):#要思考未打开摄像头时按下“拍照”的问题
-        flag, self.image = self.cap.read()
-        ShowCapture = cv2.resize(self.image, (880,495))
-        ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
-        showImage = QtGui.QImage(ShowCapture.data, ShowCapture.shape[1], ShowCapture.shape[0],
-                                 QtGui.QImage.Format_RGB888)
-        self.label_ShowCamera.setPixmap(QtGui.QPixmap.fromImage(showImage))
-        self.CameraTimer.stop()
+        if self.Gender == -1:
+            msgGender = QtWidgets.QMessageBox.warning(self, 'warning', "请选择性别", buttons=QtWidgets.QMessageBox.Ok)
+        else:
+            flag, self.image = self.cap.read()
+            ShowCapture = cv2.resize(self.image, (880,495))
+            ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
+            showImage = QtGui.QImage(ShowCapture.data, ShowCapture.shape[1], ShowCapture.shape[0],
+                                    QtGui.QImage.Format_RGB888)
+            self.label_ShowCamera.setPixmap(QtGui.QPixmap.fromImage(showImage))
+            self.CameraTimer.stop()
 
     def OpenImage(self):
         curPath = QDir.currentPath()
@@ -75,6 +81,12 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.CameraTimer.stop()
         self.cap.release()
         self.label_ShowCamera.clear()
+
+    def SelectMale(self):
+        self.Gender = 1
+
+    def SelectFemale(self):
+        self.Gender = 0
 
 
 
