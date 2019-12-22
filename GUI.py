@@ -27,8 +27,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.actionOpenCamera.triggered.connect(self.OpenCamera)
         self.actionCloseCamera.triggered.connect(self.CloseCamera)
         self.actionClearImage.triggered.connect(self.ClearImage)
-        self.radioButton_Male.toggled.connect(self.SelectMale)
-        self.radioButton_Female.toggled.connect(self.SelectFemale)
 
     def OpenCamera(self):#打开摄像头，启动倒计时
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # 后一个参数用来消一个奇怪的warn
@@ -59,6 +57,11 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.label_ShowCamera.setPixmap(QtGui.QPixmap("background.png"))
 
     def CaptureAnalyse(self):#要思考未打开摄像头时按下“拍照”的问题
+        if self.radioButton_Male.isChecked():
+            self.Gender = 1
+        elif self.radioButton_Female.isChecked():
+            self.Gender = 0
+
         if self.Gender == -1:
             msgGender = QtWidgets.QMessageBox.warning(self, 'warning', "请选择性别", buttons=QtWidgets.QMessageBox.Ok)
         else:
@@ -82,11 +85,6 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.cap.release()
         self.label_ShowCamera.clear()
 
-    def SelectMale(self):
-        self.Gender = 1
-
-    def SelectFemale(self):
-        self.Gender = 0
 
 
 
