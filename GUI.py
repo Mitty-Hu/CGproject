@@ -13,22 +13,28 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         super(MyWindow, self).__init__(parent)
 
         self.CameraTimer = QtCore.QTimer()
-
+        #摄像头
         self.CAM_NUM = 0
+        self.Flag_Image = 0 #0表示无图像，1表示开启摄像头读取图像，2表示打开图像文件
+
+        #信息区
+        self.UserName = ""
         self.Gender = -1
-        self.VideoMode = 0
-
-        self.EdgeTractThrehold1 = 50
-        self.EdgeTractThrehold2 = 101
-
         self.report = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest"
+
+        #图像区
+        self.VideoMode = 0#定义图像输出模式
+        self.EdgeTractThrehold1 = 50
+        self.EdgeTractThrehold2 = self.EdgeTractThrehold1+200
+
 
         self.setupUi(self)
         self.slot_init()
 
 
     def slot_init(self):
-        self.button_CaptureAnalyse.clicked.connect(self.CaptureAnalyse)
+        self.button_CaptureAnalyse.clicked.connect(self.Analyze)
+        self.button_SaveReport.clicked.connect(self.SaveReport)
         self.CameraTimer.timeout.connect(self.ShowCamera)#每次倒计时溢出，调用函数刷新页面
         self.actionOpenImage.triggered.connect(self.OpenImage)
         self.actionOpenCamera.triggered.connect(self.OpenCamera)
@@ -41,9 +47,10 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         if self.CameraTimer.isActive() == False:
             flag = self.cap.open(self.CAM_NUM)
             if flag == False:
-                msg = QtWidgets.QMessageBox.warning(self,'warning',"请检查摄像头与电脑是否连接正确",buttons=QtWidgets.QMessageBox.Ok)
+                QtWidgets.QMessageBox.warning(self,'warning',"请检查摄像头与电脑是否连接正确",buttons=QtWidgets.QMessageBox.Ok)
             else:
                 self.CameraTimer.start(30)
+                self.Flag_Image = 1
         else:
             self.CameraTimer.stop()
             self.cap.release()
@@ -75,31 +82,45 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.cap.release()
         self.label_ShowCamera.clear()
         self.label_ShowCamera.setPixmap(QtGui.QPixmap("background.png"))
+        self.Flag_Image = 0
 
-    def CaptureAnalyse(self):#要思考未打开摄像头时按下“拍照”的问题
+    def Analyze(self):#要思考未打开摄像头时按下“拍照”的问题
+        self.UserName = self.lineEdit_UserName.text()
         if self.radioButton_Male.isChecked():
             self.Gender = 1
         elif self.radioButton_Female.isChecked():
             self.Gender = 0
 
-        if self.Gender == -1:
-            msgGender = QtWidgets.QMessageBox.warning(self, 'warning', "请选择性别", buttons=QtWidgets.QMessageBox.Ok)
+        if self.Gender == -1 and self.UserName == "":
+            QtWidgets.QMessageBox.warning(self, 'warning', "请输入姓名和选择性别", buttons=QtWidgets.QMessageBox.Ok)
+        elif self.Gender == -1 and self.UserName != "":
+            QtWidgets.QMessageBox.warning(self, 'warning', "请选择性别", buttons=QtWidgets.QMessageBox.Ok)
+        elif self.Gender != -1 and self.UserName == "":
+            QtWidgets.QMessageBox.warning(self, 'warning', "请输入姓名", buttons=QtWidgets.QMessageBox.Ok)
         else:
-            flag, self.image = self.cap.read()
-            ShowCapture = cv2.resize(self.image, (880,495))
-            ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
-            showImage = QtGui.QImage(ShowCapture.data, ShowCapture.shape[1], ShowCapture.shape[0],
-                                    QtGui.QImage.Format_RGB888)
-            self.label_ShowCamera.setPixmap(QtGui.QPixmap.fromImage(showImage))
-            self.CameraTimer.stop()
+            if self.Flag_Image == 0:
+                QtWidgets.QMessageBox.warning(self, 'warning', "无图像输入")
+            else:
+                if self.Flag_Image == 1:
+                    self.Flag_Image = 0
+                    #flag, self.image = self.cap.read()
+                    ShowCapture = cv2.resize(self.image, (880,495))
+                    ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
+                    showImage = QtGui.QImage(ShowCapture.data, ShowCapture.shape[1], ShowCapture.shape[0],
+                                            QtGui.QImage.Format_RGB888)
+                    self.label_ShowCamera.setPixmap(QtGui.QPixmap.fromImage(showImage))
+                    self.CameraTimer.stop()
+                elif self.Flag_Image == 2:
+                    x=1
             self.textEdit_Report.setPlainText(self.report)
 
-    def OpenImage(self):
+    def OpenImage(self):#打开已有文件
         curPath = QDir.currentPath()
         imgName,imgType = QFileDialog.getOpenFileName(self,"打开图片",curPath," *.jpg;;*.png;;*.jpeg;;*.bmp;;All Files (*)")
         print(imgName)
         img = QtGui.QPixmap(imgName).scaled(self.label_ShowCamera.width(), self.label_ShowCamera.height())
         self.label_ShowCamera.setPixmap(img)
+        self.Flag_Image = 2
 
     def ClearImage(self):
         self.CameraTimer.stop()
@@ -108,7 +129,12 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.textEdit_Report.clear()
 
     def SliderChangeValue(self):
-        self.EdgeTractThrehold2 = self.horizontalSlider_EdgeTract.value()
+        self.EdgeTractThrehold1 = self.horizontalSlider_EdgeTract.value()
+
+    def SaveReport(self):
+        self.textEdit_Report.setPlainText("已保存")
+
+
 
 
 

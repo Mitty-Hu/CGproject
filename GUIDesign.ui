@@ -487,7 +487,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>540</y>
+      <y>550</y>
       <width>901</width>
       <height>101</height>
      </rect>
@@ -499,13 +499,13 @@
      </size>
     </property>
     <property name="title">
-     <string>分析</string>
+     <string/>
     </property>
     <widget class="QPushButton" name="button_CaptureAnalyse">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>30</y>
+       <y>20</y>
        <width>71</width>
        <height>61</height>
       </rect>
@@ -560,12 +560,12 @@ padding-right:10px;</string>
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_Male">
+    <widget class="QRadioButton" name="radioButton_NormalImage">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>60</y>
-       <width>41</width>
+       <x>180</x>
+       <y>40</y>
+       <width>101</width>
        <height>21</height>
       </rect>
      </property>
@@ -575,21 +575,15 @@ padding-right:10px;</string>
       </font>
      </property>
      <property name="text">
-      <string>男</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>32</width>
-       <height>32</height>
-      </size>
+      <string>正常图像</string>
      </property>
     </widget>
-    <widget class="QRadioButton" name="radioButton_Female">
+    <widget class="QRadioButton" name="radioButton_FaceTract">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>60</y>
-       <width>41</width>
+       <x>380</x>
+       <y>40</y>
+       <width>101</width>
        <height>21</height>
       </rect>
      </property>
@@ -599,22 +593,16 @@ padding-right:10px;</string>
       </font>
      </property>
      <property name="text">
-      <string>女</string>
-     </property>
-     <property name="iconSize">
-      <size>
-       <width>32</width>
-       <height>32</height>
-      </size>
+      <string>人脸捕捉</string>
      </property>
     </widget>
-    <widget class="QLabel" name="label_SelectGender">
+    <widget class="QRadioButton" name="radioButton_EdgeTract">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>20</y>
-       <width>91</width>
-       <height>31</height>
+       <x>630</x>
+       <y>40</y>
+       <width>101</width>
+       <height>21</height>
       </rect>
      </property>
      <property name="font">
@@ -623,94 +611,30 @@ padding-right:10px;</string>
       </font>
      </property>
      <property name="text">
-      <string>选择性别：</string>
+      <string>边缘检测</string>
      </property>
     </widget>
-    <widget class="QGroupBox" name="groupBox_4">
+    <widget class="QSlider" name="horizontalSlider_EdgeTract">
      <property name="geometry">
       <rect>
-       <x>260</x>
-       <y>10</y>
-       <width>621</width>
-       <height>80</height>
+       <x>610</x>
+       <y>60</y>
+       <width>160</width>
+       <height>22</height>
       </rect>
      </property>
-     <property name="title">
-      <string>功能</string>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
-     <widget class="QRadioButton" name="radioButton_NormalImage">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>35</y>
-        <width>101</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>正常图像</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButton_FaceTract">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>35</y>
-        <width>101</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>人脸捕捉</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="radioButton_EdgeTract">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>35</y>
-        <width>101</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>边缘检测</string>
-      </property>
-     </widget>
-     <widget class="QSlider" name="horizontalSlider_EdgeTract">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>55</y>
-        <width>160</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="minimum">
-       <number>101</number>
-      </property>
-      <property name="maximum">
-       <number>500</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
+     <property name="minimum">
+      <number>51</number>
+     </property>
+     <property name="maximum">
+      <number>500</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -735,7 +659,7 @@ padding-right:10px;</string>
      </size>
     </property>
     <property name="title">
-     <string>图像</string>
+     <string/>
     </property>
     <widget class="QLabel" name="label_ShowCamera">
      <property name="geometry">
@@ -773,20 +697,178 @@ padding-right:10px;</string>
      </size>
     </property>
     <property name="title">
-     <string>信息</string>
+     <string/>
     </property>
     <widget class="QTextEdit" name="textEdit_Report">
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>30</y>
+       <y>140</y>
        <width>241</width>
-       <height>481</height>
+       <height>371</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="cursor" stdset="0">
+      <cursorShape>IBeamCursor</cursorShape>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SelectGender">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>选择性别：</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Male">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>65</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>男</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="radioButton_Female">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>65</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>女</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>32</width>
+       <height>32</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_UserName">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>20</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>输入姓名：</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_ReportOutput">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>100</y>
+       <width>91</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>报告生成：</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="button_SaveReport">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>90</y>
+       <width>48</width>
+       <height>48</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border:none;
+color:gray;
+font-size:12px;
+height:40px;
+padding-left:5px;
+padding-right:10px;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>icon/icons8-save-96.png</normaloff>icon/icons8-save-96.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>48</width>
+       <height>48</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEdit_UserName">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>19</y>
+       <width>111</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>50</weight>
+       <italic>false</italic>
+       <bold>false</bold>
+       <underline>false</underline>
+       <kerning>true</kerning>
       </font>
      </property>
     </widget>
@@ -820,7 +902,7 @@ padding-right:10px;</string>
      <x>0</x>
      <y>0</y>
      <width>1200</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -842,7 +924,6 @@ padding-right:10px;</string>
     <bool>false</bool>
    </attribute>
    <addaction name="actionOpenImage"/>
-   <addaction name="actionSave"/>
    <addaction name="actionOpenCamera"/>
    <addaction name="actionCloseCamera"/>
    <addaction name="actionClearImage"/>
