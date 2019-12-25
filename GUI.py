@@ -1,5 +1,5 @@
 import cv2
-
+import os
 import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
@@ -67,10 +67,10 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         flag, self.image = self.cap.read()
 
         if self.VideoMode == 0:
-            ShowVideo = cv2.resize(self.image, (880, 495))
+            ShowVideo = cv2.resize(self.image, (660, 495))
         elif self.VideoMode == 2:
             self.edge = cv2.Canny(self.image,self.EdgeTractThrehold1,self.EdgeTractThrehold2)
-            ShowVideo = cv2.resize(self.edge, (880,495))
+            ShowVideo = cv2.resize(self.edge, (660,495))
 
         ShowVideo = cv2.cvtColor(ShowVideo, cv2.COLOR_BGR2RGB)
         showImage = QtGui.QImage(ShowVideo.data, ShowVideo.shape[1], ShowVideo.shape[0],
@@ -104,7 +104,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
                 if self.Flag_Image == 1:
                     self.Flag_Image = 0
                     #flag, self.image = self.cap.read()
-                    ShowCapture = cv2.resize(self.image, (880,495))
+                    ShowCapture = cv2.resize(self.image, (660,495))
                     ShowCapture = cv2.cvtColor(ShowCapture, cv2.COLOR_BGR2RGB)
                     showImage = QtGui.QImage(ShowCapture.data, ShowCapture.shape[1], ShowCapture.shape[0],
                                             QtGui.QImage.Format_RGB888)
@@ -133,12 +133,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
     def SaveReport(self):
         self.textEdit_Report.setPlainText("已保存")
-
-
-
-
-
-
+        # pdfName,pdfType = QFileDialog.getOpenFileName(self,"打开pdf","./","*.pdf")
 
 
 if __name__ == '__main__':

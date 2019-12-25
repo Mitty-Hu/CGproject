@@ -9,13 +9,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
+    <width>980</width>
     <height>730</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1200</width>
+    <width>980</width>
     <height>730</height>
    </size>
   </property>
@@ -488,13 +488,13 @@
      <rect>
       <x>10</x>
       <y>550</y>
-      <width>901</width>
+      <width>681</width>
       <height>101</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>901</width>
+      <width>681</width>
       <height>101</height>
      </size>
     </property>
@@ -563,7 +563,7 @@ padding-right:10px;</string>
     <widget class="QRadioButton" name="radioButton_NormalImage">
      <property name="geometry">
       <rect>
-       <x>180</x>
+       <x>150</x>
        <y>40</y>
        <width>101</width>
        <height>21</height>
@@ -581,7 +581,7 @@ padding-right:10px;</string>
     <widget class="QRadioButton" name="radioButton_FaceTract">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>340</x>
        <y>40</y>
        <width>101</width>
        <height>21</height>
@@ -599,7 +599,7 @@ padding-right:10px;</string>
     <widget class="QRadioButton" name="radioButton_EdgeTract">
      <property name="geometry">
       <rect>
-       <x>630</x>
+       <x>540</x>
        <y>40</y>
        <width>101</width>
        <height>21</height>
@@ -617,7 +617,7 @@ padding-right:10px;</string>
     <widget class="QSlider" name="horizontalSlider_EdgeTract">
      <property name="geometry">
       <rect>
-       <x>610</x>
+       <x>510</x>
        <y>60</y>
        <width>160</width>
        <height>22</height>
@@ -642,7 +642,7 @@ padding-right:10px;</string>
      <rect>
       <x>11</x>
       <y>11</y>
-      <width>901</width>
+      <width>681</width>
       <height>531</height>
      </rect>
     </property>
@@ -666,7 +666,7 @@ padding-right:10px;</string>
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>880</width>
+       <width>660</width>
        <height>495</height>
       </rect>
      </property>
@@ -684,7 +684,7 @@ padding-right:10px;</string>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>700</x>
       <y>10</y>
       <width>271</width>
       <height>531</height>
@@ -876,7 +876,7 @@ padding-right:10px;</string>
    <widget class="QLabel" name="label_SJTUlogo">
     <property name="geometry">
      <rect>
-      <x>920</x>
+      <x>700</x>
       <y>550</y>
       <width>271</width>
       <height>91</height>
@@ -901,8 +901,8 @@ padding-right:10px;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1200</width>
-     <height>23</height>
+     <width>980</width>
+     <height>26</height>
     </rect>
    </property>
   </widget>
