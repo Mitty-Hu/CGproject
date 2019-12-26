@@ -123,10 +123,14 @@ class MyWindow(QMainWindow, Ui_MainWindow):
         self.Flag_Image = 2
 
     def ClearImage(self):
-        self.CameraTimer.stop()
-        self.cap.release()
-        self.label_ShowCamera.clear()
-        self.textEdit_Report.clear()
+        if self.Flag_Image == 1:
+            self.CameraTimer.stop()
+            self.cap.release()
+            self.label_ShowCamera.clear()
+            self.textEdit_Report.clear()
+            self.Flag_Image = 0
+        else:
+            self.textEdit_Report.clear()
 
     def SliderChangeValue(self):
         self.EdgeTractThrehold1 = self.horizontalSlider_EdgeTract.value()
