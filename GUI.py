@@ -133,6 +133,7 @@ class MyWindow(QMainWindow, Ui_MainWindow):
 
     def SaveReport(self):
         self.textEdit_Report.setPlainText("已保存")
+        saveFilePath, saveFileType = QFileDialog.getSaveFileName(self,'保存报告','./',"All Files (*)")
         # pdfName,pdfType = QFileDialog.getOpenFileName(self,"打开pdf","./","*.pdf")
 
 
